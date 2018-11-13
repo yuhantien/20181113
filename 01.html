@@ -77,8 +77,9 @@ var g2 = svg2.append("g")
             throw error;
         }
 console.log(data);
-console.log(error);
-        xScale.domain(data.map(function(d) { return d.year; }));
+console.log(error);  //顯示資料
+
+        xScale.domain(data.map(function(d) { return d.party; }));
         yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
 
         g2.append("g")
@@ -95,7 +96,7 @@ console.log(error);
          .data(data)
          .enter().append("rect")
          .attr("class", "bar2")
-         .attr("x", function(d) { return xScale(d.year); })
+         .attr("x", function(d) { return xScale(d.party); })
          .attr("y", function(d) { return yScale(d.value); })
          .attr("width", xScale.bandwidth())
          .attr("height", function(d) { return height - yScale(d.value); });
