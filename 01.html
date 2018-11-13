@@ -3,7 +3,7 @@
 <head>
     <style>
         .bar {
-            fill: steelblue;
+            fill: red;
         }
         .bar2 {
             fill: yellow;
@@ -71,7 +71,7 @@ var xScale = d3.scaleBand().range([0, width]).padding(0.4),
 var g2 = svg2.append("g")
             .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-    d3.csv("xyz.csv", function(error, data) {
+    d3.csv("abc.csv", function(error, data) {
         if (error) {
             throw error;
         }
@@ -89,10 +89,10 @@ var g2 = svg2.append("g")
          }).ticks(10));
 
 
-        g2.selectAll(".bar")
+        g2.selectAll(".bar2")
          .data(data)
          .enter().append("rect")
-         .attr("class", "bar")
+         .attr("class", "bar2")
          .attr("x", function(d) { return xScale(d.year); })
          .attr("y", function(d) { return yScale(d.value); })
          .attr("width", xScale.bandwidth())
