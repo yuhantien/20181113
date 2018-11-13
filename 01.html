@@ -13,8 +13,11 @@
 </head>
 <body>
 <svg id="svg" width="600" height="500"></svg>
+
 <br>
+
 <svg id="svg2" width="600" height="500"></svg>
+
 <script>
 var svg = d3.select("#svg"),
             margin = 200,
@@ -56,7 +59,7 @@ var g = svg.append("g")
          .attr("height", function(d) { return height - yScale(d.value); });
     });
 
-    var svg = d3.select("#svg2"),
+var svg2 = d3.select("#svg2"),
             margin = 200,
             width = svg.attr("width") - margin,
             height = svg.attr("height") - margin
