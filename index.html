@@ -38,7 +38,7 @@ var g = svg.append("g")
         }
 
         xScale.domain(data.map(function(d) { return d.gender; }));
-        yScale.domain([0, d3.max(data, function(d) { return d.people; })]);
+        yScale.domain([0, d3.max(data, function(d) { return parseInt(d.people); })]);
 
         g.append("g")
          .attr("transform", "translate(0," + height + ")")
@@ -59,7 +59,7 @@ var g = svg.append("g")
          .attr("x", function(d) { return xScale(d.gender); })
          .attr("y", function(d) { return yScale(d.people); })
          .attr("width", xScale.bandwidth())
-         .attr("height", function(d) { return height - yScale(d.value); });
+         .attr("height", function(d) { return height - yScale(d.people); });
     });
 
  function onMouseOver(d, i) {
@@ -68,19 +68,19 @@ var g = svg.append("g")
           .transition()     // adds animation
           .duration(400)
           .attr('width', x.bandwidth() + 5)
-          .attr("y", function(d) { return y(d.value) - 10; })
-          .attr("height", function(d) { return height - y(d.value) + 10; });
+          .attr("y", function(d) { return y(d.people) - 10; })
+          .attr("height", function(d) { return height - y(d.people) + 10; });
 
         g.append("text")
          .attr('class', 'val') 
          .attr('x', function() {
-             return x(d.year);
+             return x(d.gender);
          })
          .attr('y', function() {
-             return y(d.value) - 15;
+             return y(d.people) - 15;
          })
          .text(function() {
-             return [ '$' +d.value];  // Value of the text
+             return [ '$' +d.people];  // Value of the text
          });
     }
     function onMouseOut(d, i) {
@@ -89,8 +89,8 @@ var g = svg.append("g")
           .transition()
           .duration(400)
           .attr('width', x.bandwidth())
-          .attr("y", function(d) { return y(d.value); })
-          .attr("height", function(d) { return height - y(d.value); });
+          .attr("y", function(d) { return y(d.people); })
+          .attr("height", function(d) { return height - y(d.people); });
 
         d3.selectAll('.val')
           .remove()
