@@ -37,7 +37,7 @@ var g = svg.append("g")
             throw error;
         }
 
-        xScale.domain(data.map(function(d) { return d.grnder; }));
+        xScale.domain(data.map(function(d) { return d.gender; }));
         yScale.domain([0, d3.max(data, function(d) { return d.people; })]);
 
         g.append("g")
@@ -56,8 +56,8 @@ var g = svg.append("g")
          .attr("class", "bar")
          .on("mouseover", onMouseOver)
          .on("mouseout", onMouseOut)
-         .attr("x", function(d) { return xScale(d.year); })
-         .attr("y", function(d) { return yScale(d.value); })
+         .attr("x", function(d) { return xScale(d.gender); })
+         .attr("y", function(d) { return yScale(d.people); })
          .attr("width", xScale.bandwidth())
          .attr("height", function(d) { return height - yScale(d.value); });
     });
