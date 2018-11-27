@@ -83,7 +83,18 @@ var g = svg.append("g")
              return [ '$' +d.value];  // Value of the text
          });
     }
+    function onMouseOut(d, i) {
+        d3.select(this).attr('class', 'bar');
+        d3.select(this)
+          .transition()
+          .duration(400)
+          .attr('width', x.bandwidth())
+          .attr("y", function(d) { return y(d.value); })
+          .attr("height", function(d) { return height - y(d.value); });
 
+        d3.selectAll('.val')
+          .remove()
+    }
    
 var svg2 = d3.select("#svg2"),
             margin = 200,
