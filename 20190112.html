@@ -1,0 +1,119 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf8">
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+</head>
+<body>
+    <p1>高雄村里歷年經費</p1><br>
+
+    <script>
+        d3.select("p1").style("color", "green");
+    </script>
+</body>
+</html>
+
+<style type="text/css">
+    <meta charset="utf8">
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+</style>
+
+<!-- Chart code -->
+<script>
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+
+// Add data
+chart.data = [{
+  "year": "106年",
+  "a": 5658000,
+  "b": 1691100,
+  "c": 225586,
+  "d": 2168374,
+  "e": 9743060,
+}, {
+  "year": "105年",
+  "a": 5658000,
+  "b": 1691100,
+  "c": 225586,
+  "d": 2168374,
+  "e": 9743060,
+}, {
+  "year": "104年",
+  "a": 5652000,
+  "b": 1833600,
+  "c": 280037,
+  "d": 1607932,
+  "e": 9373569,
+}, {
+  "year": "103年",
+  "a": 5754000,
+  "b": 1688850,
+  "c": 417635,
+  "d": 67919,
+  "e": 7928404,
+}, {
+  "year": "102年",
+  "a": 5466000,
+  "b": 1706700,
+  "c": 429883,
+  "d": 432945,
+  "e": 8035528,
+}];
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "year";
+categoryAxis.renderer.grid.template.location = 0;
+
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.renderer.inside = true;
+valueAxis.renderer.labels.template.disabled = true;
+valueAxis.min = 0;
+
+// Create series
+function createSeries(field, name) {
+  
+  // Set up series
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.name = name;
+  series.dataFields.valueY = field;
+  series.dataFields.categoryX = "year";
+  series.sequencedInterpolation = true;
+  
+  // Make it stacked
+  series.stacked = true;
+  
+  // Configure columns
+  series.columns.template.width = am4core.percent(60);
+  series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}";
+  
+  // Add label
+  var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+  labelBullet.label.text = "{valueY}";
+  labelBullet.locationY = 0.5;
+  
+  return series;
+}
+
+createSeries("a", "機關補助");
+createSeries("b", "互助自付額");
+createSeries("c", "利息收入");
+createSeries("d", "福利互助基金活存結餘款");
+createSeries("e", "合計");
+
+// Legend
+chart.legend = new am4charts.Legend();
+</script>
